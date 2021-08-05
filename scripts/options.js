@@ -1,9 +1,9 @@
 /*
-	Copyright 2012
-	Mike Chambers
-	mikechambers@gmail.com
+    Copyright 2012
+    Mike Chambers
+    mikechambers@gmail.com
 
-	http://www.mikechambers.com
+    http://www.mikechambers.com
 */
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
@@ -18,36 +18,36 @@
     let notificationsCB;
     let openInPopoutCB;
     let ignoreVodcastsCB;
-      
-
-    let save = function() {
-        
 
 
-        if(usernameInput.value.trim().length == 0) {
+    let save = function () {
+
+
+
+        if (usernameInput.value.trim().length == 0) {
             showStatusMessage("Account Name Required.");
             return;
         }
-        if(usernameInput.value == localStorage.accountName && localStorage.userId) {
+        if (usernameInput.value == localStorage.accountName && localStorage.userId) {
             storeData();
             return;
         }
 
         let url = "https://api.twitch.tv/kraken/users?login=" + encodeURI(usernameInput.value);
-        background.callApi(url, (rawData) => {onUserInfoLoad(rawData)}, onUserInfoError);
+        background.callApi(url, (rawData) => { onUserInfoLoad(rawData) }, onUserInfoError);
     }
 
-    let onUserInfoLoad = function(rawData) {
+    let onUserInfoLoad = function (rawData) {
         let id;
 
         try {
-            if(!rawData.users.length) {
+            if (!rawData.users.length) {
                 showStatusMessage("Account name not found.");
                 return;
             }
             id = rawData.users[0]._id;
 
-        } catch(e) {
+        } catch (e) {
             console.log("Error retrieving user id");
             console.log(e);
             showStatusMessage("Error retrieving user id");
@@ -57,7 +57,7 @@
         storeData(id);
     }
 
-    let onUserInfoError = function(XMLHttpRequest, textStatus, errorThrown) {
+    let onUserInfoError = function (XMLHttpRequest, textStatus, errorThrown) {
         console.log("onUserInfoError");
         console.log("------------------------Error Loading User Info-------------------------------------");
         console.log("onUserInfoError : " + XMLHttpRequest.responseText);
@@ -68,60 +68,60 @@
         console.log("------------------------------End Error----------------------------------------");
     }
 
-    let storeData = function(userId) {
-         
+    let storeData = function (userId) {
+
         localStorage.accountName = usernameInput.value;
         localStorage.showNotifications = notificationsCB.checked;
         localStorage.openInPopout = openInPopoutCB.checked;
         localStorage.ignoreVodcasts = ignoreVodcastsCB.checked;
 
-        if(userId) {
+        if (userId) {
             localStorage.userId = userId;
         }
-        
+
         showStatusMessage("Options Saved");
     }
-    
-    let showStatusMessage = function(msg) {
+
+    let showStatusMessage = function (msg) {
         let status = document.getElementById("status");
         status.innerHTML = msg;
         status.style.opacity = 1;
-        
+
         setTimeout(function () {
             status.innerHTML = "";
             status.style.opacity = 0;
         }, 4000);
     }
-    
+
     let background;
-    let init = function() {
-        
+    let init = function () {
+
         background = chrome.extension.getBackgroundPage();
 
         let accountName = localStorage.accountName;
         usernameInput = document.getElementById("username");
-        
+
         if (accountName) {
             usernameInput.value = accountName;
         }
-        
+
         notificationsCB = document.getElementById("showNotificationsCheck");
         let showNotifications = (localStorage.showNotifications === "true");
-        
+
         if (showNotifications) {
             notificationsCB.checked = true;
         }
-     
+
         openInPopoutCB = document.getElementById("openInPopoutCheck");
         let openInPopout = (localStorage.openInPopout === "true");
-        
+
         if (openInPopout) {
             openInPopoutCB.checked = true;
         }
-        
+
         ignoreVodcastsCB = document.getElementById("ignoreVodcastsCheck");
         let ignoreVodcasts = (localStorage.ignoreVodcasts === "true");
-        
+
         if (ignoreVodcasts) {
             ignoreVodcastsCB.checked = true;
         }

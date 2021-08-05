@@ -1,9 +1,9 @@
 /*
-	Copyright 2012
-	Mike Chambers
-	mikechambers@gmail.com
+    Copyright 2012
+    Mike Chambers
+    mikechambers@gmail.com
 
-	http://www.mikechambers.com
+    http://www.mikechambers.com
 */
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */

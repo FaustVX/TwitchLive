@@ -49,7 +49,7 @@ ul li:before {
 }
 
 .streamSectionTitle:hover {
-    /*cursor:default;*/
+    /*cursor: default;*/
     -webkit-user-select: none;
     user-select: none;
 }

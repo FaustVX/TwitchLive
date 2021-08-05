@@ -1,7 +1,10 @@
 {
    "background": {
       "persistent": true,
-      "scripts": [ "scripts/jquery-1.6.1.min.js", "scripts/background.js" ]
+      "scripts": [
+         "scripts/jquery-1.6.1.min.js",
+         "scripts/background.js"
+      ]
    },
    "browser_action": {
       "default_icon": "images/icon.png",
@@ -19,8 +22,14 @@
    "manifest_version": 2,
    "name": "Twitch Live",
    "options_page": "options.html",
-   "permissions": [ "https://api.twitch.tv/", "notifications", "contextMenus" ],
+   "permissions": [
+      "https://api.twitch.tv/",
+      "notifications",
+      "contextMenus"
+   ],
    "update_url": "http://clients2.google.com/service/update2/crx",
    "version": "1.90",
-   "web_accessible_resources": [ "images/icon.png" ]
+   "web_accessible_resources": [
+      "images/icon.png"
+   ]
 }
