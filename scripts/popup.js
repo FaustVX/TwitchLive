@@ -9,7 +9,7 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 /*global $, document, chrome, window, localStorage, setTimeout, unescape, escape */
 
-(function () {
+(function() {
 
     "use strict";
 
@@ -20,7 +20,7 @@
     let VOD_STRING = "rerun";
 
     function numberWithCommas(x) {
-        if(x < 1000) {
+        if (x < 1000) {
             return x;
         }
 
@@ -28,7 +28,7 @@
     }
 
     function onOptionsClick(e) {
-        chrome.tabs.create({"url": "options.html"});
+        chrome.tabs.create({ "url": "options.html" });
     }
 
     function onCloseClick(e) {
@@ -76,7 +76,7 @@
         }
 
         sortable.sort(
-            function (_a, _b) {
+            function(_a, _b) {
                 var a = _a[0].toUpperCase();
                 var b = _b[0].toUpperCase();
 
@@ -104,15 +104,13 @@
         if (openInPopout) {
             url += "/popout";
 
-            chrome.windows.create(
-                {
-                    url: url,
-                    focused: true,
-                    type: "popup"
-                }
-            );
+            chrome.windows.create({
+                url: url,
+                focused: true,
+                type: "popup"
+            });
         } else {
-            chrome.tabs.create({"url": url});
+            chrome.tabs.create({ "url": url });
         }
 
         window.close();
@@ -179,22 +177,20 @@
                 var login = channel.name;
 
                 var className = "streamDiv";
-                if(stream.stream_type == VOD_STRING) {
+                if (stream.stream_type == VOD_STRING) {
                     className += " vodcast";
                 }
 
-                html += "<div title=\"" + channel.status.replace(/"/g, "&quot;") + "\" class='" + className + "' data-url='" + escape(channel.url) + "'>" +
-                        login +
-                        "<span class='channelCount'>" + numberWithCommas(stream.viewers) + "</span></a></div>";
+                html += "<a href=\"" + channel.url + "\" target=\"_blank\"><div title=\"" + channel.status.replace(/"/g, "&quot;") + "\" class='" + className + "'>" +
+                    login +
+                    "<a href=\"" + (channel.url + "/chat") + "\" target=\"_blank\"><img src=\"images/open_in_new.svg\" alt=\"chat popout\"></img></a>" +
+                    "<span class='channelCount'>" + numberWithCommas(stream.viewers) + "</span></div></a>";
             }
 
             html += "<div>&nbsp;</div>";
         }
 
         $("#streamList").append(html);
-
-        //$(".channelLink").bind("click", onChannelClick);
-        $(".streamDiv").bind("click", onChannelClick);
 
         $(".streamSectionTitle").bind("click", onGameTitleClick);
 
@@ -210,7 +206,7 @@
     }
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         $("#streamList").empty();
         $("#noStreamsDiv").hide();
@@ -243,7 +239,7 @@
         //this is required so we can get the mouse cursor to change on hover
 
         //hack to work around chrome extension bug that gives focus to the closeAnchor
-        setTimeout(function () {
+        setTimeout(function() {
             $("#closeAnchor").blur();
         }, 100);
     });
