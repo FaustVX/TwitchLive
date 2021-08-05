@@ -184,6 +184,7 @@
                 html += "<a href=\"" + channel.url + "\" target=\"_blank\"><div title=\"" + channel.status.replace(/"/g, "&quot;") + "\" class='" + className + "'>" +
                     login +
                     "<a href=\"" + (channel.url + "/chat") + "\" target=\"_blank\"><img src=\"images/open_in_new.svg\" alt=\"chat popout\"></img></a>" +
+                    "<span class='uptime'>" + new Date((Date.now() - Date.parse(stream.created_at)) - (1 * 60 * 60 * 1000)).toLocaleTimeString() + "</span>" +
                     "<span class='channelCount'>" + numberWithCommas(stream.viewers) + "</span></div></a>";
             }
 

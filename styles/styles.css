@@ -107,6 +107,13 @@ ul li:before {
     float: right;
 }
 
+.uptime {
+    font-size: 80%;
+    float: right;
+    margin-left: 5px;
+    font-style: italic;
+}
+
 #streamContainer {
     background-color: #ffffff;
     border-width: 1px;
